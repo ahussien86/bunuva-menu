@@ -42,4 +42,106 @@ document.querySelectorAll('.add').forEach(b=>b.addEventListener('click',()=>{let
 items.addEventListener('click',e=>{let b=e.target.closest('[data-del]');if(b){cart.splice(+b.dataset.del,1);render()}});
 document.querySelector('#clear').addEventListener('click',()=>{cart.length=0;render();msg.textContent='تم مسح السلة.'});
 document.querySelectorAll('.filter').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.filter').forEach(x=>x.classList.toggle('active',x===b));document.querySelectorAll('[data-cat]').forEach(x=>x.hidden=b.dataset.filter!=='all'&&x.dataset.cat!==b.dataset.filter)}));
+const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQsGeFMFcVipXpnXWB9-jVeMHHVqcttysgNxALGpZ9bSbB2dIloUj13iAPiLE9T0FbRmHoopBmlQ-4D/pub?gid=0&single=true&output=csv";
+
+async function loadMenu() {
+  try {
+    const response = await fetch(SHEET_URL);
+    if (!response.ok) throw new Error("Failed to load menu");
+
+    const csv = await response.text();
+
+    function parseCSV(text) {
+      const rows = [];
+      let row = [], cell = "", quoted = false;
+
+      for (let i = 0; i < text.length; i++) {
+        const c = text[i];
+
+        if (c === '"' && quoted && text[i + 1] === '"') {
+          cell += '"';
+          i++;
+        } else if (c === '"') {
+          quoted = !quoted;
+        } else if (c === ',' && !quoted) {
+          row.push(cell);
+          cell = "";
+        } else if ((c === '\n' || c === '\r') && !quoted) {
+          if (c === '\r' && text[i + 1] === '\n') i++;
+          row.push(cell);
+          if (row.some(x => x.trim() !== "")) rows.push(row);
+          row = [];
+          cell = "";
+        } else {
+          cell += c;
+        }
+      }
+
+      row.push(cell);
+      if (row.some(x => x.trim() !== "")) rows.push(row);
+      return rows;
+    }
+
+    const rows = parseCSV(csv);
+    const products = rows.slice(1).map(r => ({
+      name: r[1]?.trim(),
+      category: r[2]?.trim().toLowerCase(),
+      description: r[3]?.trim(),
+      price: Number(r[4]),
+      image: r[5]?.trim(),
+      available: r[6]?.trim().toUpperCase()
+    })).filter(p =>
+      p.name && Number.isFinite(p.price) && p.available === "TRUE"
+    );
+
+    const categoryMap = {
+      burger: "burger",
+      chicken: "chicken",
+      sides: "sides",
+      drinks: "drinks"
+    };
+
+    const menuSection = document.querySelector("#menu");
+
+    if (!menuSection) throw new Error("Menu section not found");
+
+    menuSection.innerHTML = products.map(p => {
+      const category = categoryMap[p.category];
+      if (!category) return "";
+
+      return `
+        <article class="card" data-cat="${category}">
+          <div class="pic">${p.image || "🍽️"}</div>
+          <div class="info">
+            <div class="name">${p.name}</div>
+            <div class="desc">${p.description || ""}</div>
+            <div class="bottom">
+              <span class="price">${p.price} ج.م</span>
+              <button class="add" data-name="${p.name}" data-price="${p.price}">+ أضف</button>
+            </div>
+          </div>
+        </article>
+      `;
+    }).join("");
+
+    menuSection.querySelectorAll(".add").forEach(b => {
+      b.addEventListener("click", () => {
+        let x = cart.find(x => x.name === b.dataset.name);
+        x ? x.qty++ : cart.push({
+          name: b.dataset.name,
+          price: Number(b.dataset.price),
+          qty: 1
+        });
+        render();
+        msg.textContent = "تمت إضافة المنتج للسلة التجريبية.";
+      });
+    });
+
+  } catch (error) {
+    console.error("Menu loading error:", error);
+    msg.textContent = "تعذر تحميل المنيو. حاول تحديث الصفحة.";
+  }
+}
+
+loadMenu();
 </script></body></html>
