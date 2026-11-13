@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BUNOVA | المنيو الإلكتروني</title>
+<style>
+:root{--ink:#251f1b;--cream:#faf6ef;--accent:#d97736;--muted:#786f68;--line:#eadfd3}
+*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:Tahoma,Arial,sans-serif}
+.wrap{max-width:850px;margin:auto;padding:18px}.hero{background:linear-gradient(125deg,#211d1a,#493024);color:white;border-radius:24px;padding:28px 24px;position:relative;overflow:hidden}
+.brand{font-size:38px;font-weight:900;letter-spacing:2px}.brand span{color:#f0a45e}.tag{color:#ead7c5;margin-top:8px}.hero .burger{position:absolute;left:22px;top:22px;font-size:72px;opacity:.95}
+.meta{display:flex;gap:16px;flex-wrap:wrap;margin-top:22px;color:#f0dfcf;font-size:13px}
+h2{font-size:22px;margin:26px 0 5px}.sub{color:var(--muted);font-size:14px;margin-bottom:16px}
+.filters{display:flex;gap:9px;overflow:auto;padding:4px 0 14px}.filter{border:1px solid var(--line);background:white;border-radius:99px;padding:10px 16px;white-space:nowrap;cursor:pointer;font-weight:bold}.filter.active{background:var(--ink);color:white;border-color:var(--ink)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}.card{background:white;border:1px solid var(--line);border-radius:17px;padding:14px;display:flex;gap:12px;align-items:center}.pic{width:76px;height:76px;border-radius:14px;background:#f5e8d8;display:grid;place-items:center;font-size:38px;flex-shrink:0}.info{flex:1;min-width:0}.name{font-weight:800}.desc{font-size:12px;color:var(--muted);line-height:1.6;margin:5px 0}.bottom{display:flex;align-items:center;justify-content:space-between;gap:8px}.price{font-weight:900;color:#9b4c20}.add{border:0;background:var(--accent);color:white;border-radius:9px;padding:8px 12px;font-weight:bold;cursor:pointer}
+.cart{background:white;border:1px solid var(--line);border-radius:18px;padding:17px;margin-top:24px}.cartrow{display:flex;justify-content:space-between;gap:10px;padding:7px 0;border-bottom:1px solid #f1e9e1;font-size:14px}.total{display:flex;justify-content:space-between;font-weight:900;font-size:18px;padding-top:14px}.clear{border:0;background:none;color:var(--muted);cursor:pointer}.note{font-size:12px;color:var(--muted);line-height:1.7}.empty{color:var(--muted);font-size:14px;padding:12px 0}.footer{text-align:center;color:var(--muted);font-size:12px;padding:24px 0}
+@media(max-width:480px){.hero{padding:24px 18px}.brand{font-size:32px}.hero .burger{font-size:56px;left:14px;top:25px}.meta{gap:10px}}
+</style>
+</head>
+<body><main class="wrap">
+<header class="hero"><div class="brand">BUNO<span>VA</span></div><div class="tag">طعم مختلف… في كل قضمة 🍔</div><div class="burger">🍔</div><div class="meta"><span>📍 المنيا</span><span>🕒 يومياً 12 ظهراً – 1 صباحاً</span><span>⭐ 4.8</span></div></header>
+<h2>منيو BUNOVA</h2><div class="sub">اختار اللي نفسك فيه، واضغط «أضف» لتجربة الطلب.</div>
+<nav class="filters" aria-label="أقسام المنيو"><button class="filter active" data-filter="all">الكل</button><button class="filter" data-filter="burger">🍔 برجر</button><button class="filter" data-filter="chicken">🍗 فراخ</button><button class="filter" data-filter="sides">🍟 إضافات</button><button class="filter" data-filter="drinks">🥤 مشروبات</button></nav>
+<section class="grid" id="menu">
+<article class="card" data-cat="burger"><div class="pic">🍔</div><div class="info"><div class="name">Bunova Classic</div><div class="desc">برجر لحم، جبنة شيدر، خس وصوص BUNOVA الخاص.</div><div class="bottom"><span class="price">120 ج.م</span><button class="add" data-name="Bunova Classic" data-price="120">+ أضف</button></div></div></article>
+<article class="card" data-cat="burger"><div class="pic">🍔</div><div class="info"><div class="name">Double Smash</div><div class="desc">قطعتان لحم، جبنة شيدر وصوص مميز.</div><div class="bottom"><span class="price">165 ج.م</span><button class="add" data-name="Double Smash" data-price="165">+ أضف</button></div></div></article>
+<article class="card" data-cat="burger"><div class="pic">🍄</div><div class="info"><div class="name">Mushroom Melt</div><div class="desc">برجر لحم مع المشروم وصوص كريمي.</div><div class="bottom"><span class="price">145 ج.م</span><button class="add" data-name="Mushroom Melt" data-price="145">+ أضف</button></div></div></article>
+<article class="card" data-cat="chicken"><div class="pic">🍗</div><div class="info"><div class="name">Crispy Chicken</div><div class="desc">فراخ كرسبي، خس ومايونيز.</div><div class="bottom"><span class="price">110 ج.م</span><button class="add" data-name="Crispy Chicken" data-price="110">+ أضف</button></div></div></article>
+<article class="card" data-cat="chicken"><div class="pic">🌯</div><div class="info"><div class="name">Chicken Wrap</div><div class="desc">راب فراخ مع الخضار والصوص.</div><div class="bottom"><span class="price">95 ج.م</span><button class="add" data-name="Chicken Wrap" data-price="95">+ أضف</button></div></div></article>
+<article class="card" data-cat="sides"><div class="pic">🍟</div><div class="info"><div class="name">French Fries</div><div class="desc">بطاطس مقلية مقرمشة.</div><div class="bottom"><span class="price">40 ج.م</span><button class="add" data-name="French Fries" data-price="40">+ أضف</button></div></div></article>
+<article class="card" data-cat="sides"><div class="pic">🧀</div><div class="info"><div class="name">Cheese Fries</div><div class="desc">بطاطس مع صوص الجبنة.</div><div class="bottom"><span class="price">60 ج.م</span><button class="add" data-name="Cheese Fries" data-price="60">+ أضف</button></div></div></article>
+<article class="card" data-cat="drinks"><div class="pic">🥤</div><div class="info"><div class="name">Soft Drink</div><div class="desc">مشروب غازي بارد.</div><div class="bottom"><span class="price">25 ج.م</span><button class="add" data-name="Soft Drink" data-price="25">+ أضف</button></div></div></article>
+<article class="card" data-cat="drinks"><div class="pic">🍋</div><div class="info"><div class="name">Fresh Lemon</div><div class="desc">ليمون فريش منعش.</div><div class="bottom"><span class="price">35 ج.م</span><button class="add" data-name="Fresh Lemon" data-price="35">+ أضف</button></div></div></article>
+</section>
+<section class="cart"><div style="display:flex;justify-content:space-between;align-items:center"><strong>🛒 طلبك التجريبي</strong><button class="clear" id="clear">مسح السلة</button></div><div id="cart-items" class="empty">السلة فاضية لسه.</div><div class="total"><span>الإجمالي</span><span id="total">0 ج.م</span></div><p class="note" id="msg">دي نسخة عرض تجريبية. الطلبات لا تُرسل للمطعم فعلياً.</p></section>
+<footer class="footer">BUNOVA · Digital Menu Demo<br>اسم المطعم والأصناف والأسعار افتراضية لأغراض العرض.</footer>
+</main>
+<script>
+const cart=[];const items=document.querySelector('#cart-items'),total=document.querySelector('#total'),msg=document.querySelector('#msg');
+function render(){if(!cart.length){items.className='empty';items.textContent='السلة فاضية لسه.'}else{items.className='';items.innerHTML=cart.map((x,i)=>`<div class="cartrow"><span>${x.name} × ${x.qty}</span><span>${x.price*x.qty} ج.م <button class="clear" data-del="${i}" aria-label="حذف">✕</button></span></div>`).join('')}total.textContent=cart.reduce((s,x)=>s+x.price*x.qty,0)+' ج.م'}
+document.querySelectorAll('.add').forEach(b=>b.addEventListener('click',()=>{let x=cart.find(x=>x.name===b.dataset.name);x?x.qty++:cart.push({name:b.dataset.name,price:+b.dataset.price,qty:1});render();msg.textContent='تمت إضافة المنتج للسلة التجريبية.'}));
+items.addEventListener('click',e=>{let b=e.target.closest('[data-del]');if(b){cart.splice(+b.dataset.del,1);render()}});
+document.querySelector('#clear').addEventListener('click',()=>{cart.length=0;render();msg.textContent='تم مسح السلة.'});
+document.querySelectorAll('.filter').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.filter').forEach(x=>x.classList.toggle('active',x===b));document.querySelectorAll('[data-cat]').forEach(x=>x.hidden=b.dataset.filter!=='all'&&x.dataset.cat!==b.dataset.filter)}));
+</script></body></html>
